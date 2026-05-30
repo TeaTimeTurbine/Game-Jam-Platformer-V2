@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dc5mwea03cenh"]
+
+[ext_resource type="Script" uid="uid://cuc0cy3cvabys" path="res://GameJamPlatformer/Scenes/negative_gravity_well.gd" id="1_lrfxw"]
+[ext_resource type="Texture2D" uid="uid://bsrsoar0itoes" path="res://GameJamPlatformer/PixelAdventureAssets/Free/Background/Yellow.png" id="2_0106m"]
+[ext_resource type="Shader" uid="uid://bjeynlh281x8e" path="res://GameJamPlatformer/Scenes/negative_gravity_well.gdshader" id="2_ucluy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucluy"]
+size = Vector2(128, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4xpw"]
+shader = ExtResource("2_ucluy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0106m"]
+shader = ExtResource("2_ucluy")
+
+[node name="NegativeGravityWell" type="Node2D" unique_id=1331781181]
+script = ExtResource("1_lrfxw")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2114216113]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=654519096]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_ucluy")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=203949204]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i4xpw")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_0106m")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1937024124]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_0106m")
+offset_left = -64.0
+offset_bottom = 64.0
+texture = ExtResource("2_0106m")
+flip_h = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

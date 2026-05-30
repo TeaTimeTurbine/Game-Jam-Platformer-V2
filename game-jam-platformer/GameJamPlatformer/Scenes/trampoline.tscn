@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://c3nf3tyivrdu"]
+
+[ext_resource type="Script" uid="uid://bt3ve1rf2tmty" path="res://GameJamPlatformer/Scenes/trampoline.gd" id="1_wxv3p"]
+[ext_resource type="Texture2D" uid="uid://dgolatsiimgb2" path="res://GameJamPlatformer/PixelAdventureAssets/Free/Traps/Trampoline/Idle.png" id="2_n70ub"]
+[ext_resource type="Texture2D" uid="uid://bt12dey2xx3kw" path="res://GameJamPlatformer/PixelAdventureAssets/Free/Traps/Trampoline/Jump (28x28).png" id="3_00c6a"]
+[ext_resource type="AudioStream" uid="uid://c0c3n4s3cb76u" path="res://GameJamPlatformer/Assets/sounds/TrampolineSound.ogg" id="3_n70ub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00c6a"]
+atlas = ExtResource("2_n70ub")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwam5"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t18i"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(28, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksb2m"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(56, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od3xl"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(84, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdhvl"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(112, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumh6"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(140, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbgmv"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(168, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnm7j"]
+atlas = ExtResource("3_00c6a")
+region = Rect2(196, 0, 28, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vwam5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00c6a")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwam5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t18i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksb2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od3xl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdhvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbgmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnm7j")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n70ub"]
+size = Vector2(16, 13.333334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00c6a"]
+size = Vector2(15.724133, 5.1612897)
+
+[node name="Trampoline" type="Node2D" unique_id=498168662]
+script = ExtResource("1_wxv3p")
+metadata/_edit_group_ = true
+
+[node name="SpringAnim" type="AnimatedSprite2D" parent="." unique_id=2041642904]
+physics_interpolation_mode = 1
+texture_filter = 1
+scale = Vector2(1.7321429, 1.7074087)
+sprite_frames = SubResource("SpriteFrames_vwam5")
+animation = &"Jump"
+autoplay = "Idle"
+
+[node name="TrampolineSound" type="AudioStreamPlayer2D" parent="." unique_id=2074606374]
+stream = ExtResource("3_n70ub")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1010062643]
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=852040679]
+position = Vector2(0, 1.333333)
+shape = SubResource("RectangleShape2D_n70ub")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=19080330]
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1712453467]
+position = Vector2(-1.6129843e-07, -8)
+scale = Vector2(1.017544, 1.0333333)
+shape = SubResource("RectangleShape2D_00c6a")
+
+[node name="Timer" type="Timer" parent="." unique_id=1436372084]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

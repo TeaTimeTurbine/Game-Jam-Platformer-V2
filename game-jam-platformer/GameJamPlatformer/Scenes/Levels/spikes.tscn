@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ddrx6bd1w5u81"]
+
+[ext_resource type="Script" uid="uid://bh21xnfnj6jvc" path="res://GameJamPlatformer/Scenes/Levels/spikes.gd" id="1_afjw5"]
+[ext_resource type="Texture2D" uid="uid://43nn4ow71cyk" path="res://GameJamPlatformer/PixelAdventureAssets/Free/Traps/Spikes/Idle.png" id="1_gn26b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gn26b"]
+size = Vector2(16, 16)
+
+[node name="Spikes" type="Area2D" unique_id=353658935]
+texture_filter = 1
+scale = Vector2(3, 3)
+script = ExtResource("1_afjw5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2087824486]
+texture = ExtResource("1_gn26b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1610455478]
+shape = SubResource("RectangleShape2D_gn26b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
