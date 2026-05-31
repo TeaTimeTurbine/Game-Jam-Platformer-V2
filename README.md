@@ -13,3 +13,6 @@ Apples will add to score, but reset upon death. There are 12 total at this point
 3 levels currently exist.
 
 Have fun and let me know of any gameplay / code suggestions!
+
+
+To play, you will need the console.pck and console.exe files
